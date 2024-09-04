@@ -28,6 +28,7 @@ for row in range(img_arr.shape[0]):
 
 img_c = Image.fromarray(img_c)
 
+# PART1 images save
 img_a.save('img_a.bmp')
 img_b.save('img_b.bmp')
 img_c.save('img_c.bmp')
@@ -46,6 +47,7 @@ _, img_f = cv2.threshold(np.array(img), 128, 255, cv2.THRESH_BINARY)
 img_f = Image.fromarray(img_f)
 # img_f.show()
 
+# PART2 images save
 img_d.save('img_d.bmp')
 img_e.save('img_e.bmp')
 img_f.save('img_f.bmp')
