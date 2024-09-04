@@ -18,12 +18,21 @@ img_b = Image.fromarray(img_b)
 #img_b.show()
 
 # Q(c)
-img_d = np.zeros([512, 512], dtype=img_arr.dtype)
+img_c = np.zeros([512, 512], dtype=img_arr.dtype)
 for row in range(img_arr.shape[0]):
     for col in range(img_arr.shape[1]):
-        img_d[row][col] = img_arr[row][col]
+        img_c[row][col] = img_arr[col][row]
 
-img_d = Image.fromarray(img_d)
-img_d.show()
+img_c = Image.fromarray(img_c)
+
+img_a.save('img_a.bmp')
+img_b.save('img_b.bmp')
+img_c.save('img_c.bmp')
+
+# Q(d)
+
+# Q(e)
+
+# Q(f)
 
     
