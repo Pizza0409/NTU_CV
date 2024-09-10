@@ -35,8 +35,8 @@ img_c.save('img_c.bmp')
 
 # PART 2
 # Q(d)
-img_d = img.rotate(315)
-# img_d.show()
+img_d = img.rotate(315, expand=True)
+img_d.show()
 
 # Q(e)
 img_e = img.resize((int(img.size[0] / 2), int(img.size[1] / 2)))
