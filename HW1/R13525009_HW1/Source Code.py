@@ -12,7 +12,7 @@ img_arr = np.array(img)
 # Q(a)
 img_a = img_arr[::-1]
 img_a = Image.fromarray(img_a)
-img_a.show()
+# img_a.show()
 
 
 # Q(b)
@@ -27,16 +27,18 @@ for row in range(img_arr.shape[0]):
         img_c[row][col] = img_arr[col][row]
 
 img_c = Image.fromarray(img_c)
+# img_c.show()
 
-# PART1 images save
-# img_a.save('img_a.bmp')
-# img_b.save('img_b.bmp')
-# img_c.save('img_c.bmp')
+
+# PART 1 images save
+img_a.save('img_a.bmp')
+img_b.save('img_b.bmp')
+img_c.save('img_c.bmp')
 
 # PART 2
 # Q(d)
 img_d = img.rotate(315, expand=True)
-img_d.show()
+# img_d.show()
 
 # Q(e)
 img_e = img.resize((int(img.size[0] / 2), int(img.size[1] / 2)))
@@ -48,9 +50,9 @@ img_f = Image.fromarray(img_f)
 # img_f.show()
 
 # PART2 images save
-# img_d.save('img_d.bmp')
-# img_e.save('img_e.bmp')
-# img_f.save('img_f.bmp')
+img_d.save('img_d.bmp')
+img_e.save('img_e.bmp')
+img_f.save('img_f.bmp')
 
 
     
