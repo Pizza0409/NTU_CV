@@ -34,7 +34,6 @@ for row in range(img_size_0):
 
 plt.fill(histogram)
 plt.xlim(0, 255)
-plt.ylim(0, max(histogram))
 # plt.show()
 plt.savefig("lena_b.jpg")
 Image.open('./lena_b.jpg').save('lena_b.bmp')
@@ -99,6 +98,6 @@ for i in answer:
     cv2.circle(img_c, (i[1], i[0]), 5, (255, 0, 0), 3)
 
 img_c = Image.fromarray(img_c)
-img_c.show()
+# img_c.show()
 img_c.save("img_c.bmp")
 
