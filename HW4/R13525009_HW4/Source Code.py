@@ -32,12 +32,12 @@ kernel_k = np.array([[0,1,1],[0,0,1],[0,0,0]])
 
 # Q1 dilation
 def dilation(img, kernel):
-    padding_img = np.pad(img, 2, mode='constant', constant_values=0)
+    padding_img = np.pad(img, kernel.shape[0]-2, mode='constant', constant_values=0)
     dilation_img = np.zeros_like(img)
 
     for i in range(img_size0):
         for j in range(img_size1):
-            if np.any(padding_img[i:i+5, j:j+5] * kernel == 255):
+            if np.any(padding_img[i:i+kernel.shape[0], j:j+kernel.shape[1]] * kernel == 255):
                 dilation_img[i, j] = 255
 
     return dilation_img.astype(np.uint8)
@@ -54,7 +54,7 @@ def erosion(img, kernel):
 
     for i in range(img_size0):
         for j in range(img_size1):
-            if np.all(padding_img[i:i+kernel.shape[0], j:j+kernel.shape[0]] * kernel == kernel * 255):
+            if np.all(padding_img[i:i+kernel.shape[0], j:j+kernel.shape[1]] * kernel == kernel * 255):
                 erosion_img[i, j] = 255
 
     return erosion_img.astype(np.uint8)
