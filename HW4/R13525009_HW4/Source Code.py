@@ -33,19 +33,19 @@ kernel_k = np.array([[0,1,1],[0,0,1],[0,0,0]])
 # Q1 dilation
 def dilation(img, kernel):
     kernel_size = len(kernel)
-    pad_size = kernel_size // 2
-    padded_img = np.pad(img, pad_size, mode='constant', constant_values=0)
     dilation_img = np.zeros_like(img)
-
+    
     for i in range(img_size0):
         for j in range(img_size1):
             max_value = 0
             for ki in range(kernel_size):
                 for kj in range(kernel_size):
-                    if kernel[ki][kj] == 1:
-                        pixel_value = padded_img[i + ki][j + kj]
-                        if pixel_value > max_value:
-                            max_value = pixel_value
+                    ni, nj = i + ki - kernel_size // 2, j + kj - kernel_size // 2
+                    if 0 <= ni < img_size0 and 0 <= nj < img_size1:
+                        if kernel[ki][kj] == 1:
+                            pixel_value = img[ni][nj]
+                            if pixel_value > max_value:
+                                max_value = pixel_value
             dilation_img[i, j] = max_value
 
     return dilation_img.astype(np.uint8)
@@ -58,8 +58,6 @@ dilated_img.save('img_a.bmp')
 # Q2 erosion
 def erosion(img, kernel):
     kernel_size = len(kernel)
-    pad_size = kernel_size // 2
-    padded_img = np.pad(img, pad_size, mode='constant', constant_values=255)
     erosion_img = np.zeros_like(img)
 
     for i in range(img_size0):
@@ -67,13 +65,16 @@ def erosion(img, kernel):
             min_value = 255
             for ki in range(kernel_size):
                 for kj in range(kernel_size):
-                    if kernel[ki][kj] == 1:
-                        pixel_value = padded_img[i + ki][j + kj]
-                        if pixel_value < min_value:
-                            min_value = pixel_value
+                    ni, nj = i + ki - kernel_size // 2, j + kj - kernel_size // 2
+                    if 0 <= ni < img_size0 and 0 <= nj < img_size1:
+                        if kernel[ki][kj] == 1:
+                            pixel_value = img[ni][nj]
+                            if pixel_value < min_value:
+                                min_value = pixel_value
             erosion_img[i, j] = min_value
 
     return erosion_img.astype(np.uint8)
+
 
 erosion_img = erosion(img_arr_binary, ort_kernel)
 erosion_img = im.fromarray(erosion_img)
