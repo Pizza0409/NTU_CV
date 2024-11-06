@@ -1,0 +1,1 @@
+img_binary.show()
