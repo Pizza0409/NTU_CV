@@ -68,4 +68,4 @@ for i in range(64):
 plt.xlim(-1, 64)
 plt.ylim(-1, 64)
 plt.savefig("./result.png")
-# plt.show()
+plt.show()
