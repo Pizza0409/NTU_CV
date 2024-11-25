@@ -1,0 +1,84 @@
+SNR for Gaussian noisy with amp = 10 is 13.597449
+SNR for Gaussian noisy with amp = 30 is 4.173514
+SNR for salt & pepper with threshold = 0.1 is -2.108260
+SNR for salt & pepper with threshold = 0.05 is 0.882124
+------------------------------------
+box filter : 
+------------------------------------
+gaussian noise with 10
+++++++++++++++++++++++++++++++++++++
+SNR for box filter 3x3: 17.745861
+SNR for box filter 5x5: 14.869506
+------------------------------------
+gaussian noise with 30
+++++++++++++++++++++++++++++++++++++
+SNR for box filter 3x3: 12.633835
+SNR for box filter 5x5: 13.331065
+------------------------------------
+salt and pepper noise with 0.1
+++++++++++++++++++++++++++++++++++++
+SNR for box filter 3x3: 6.302114
+SNR for box filter 5x5: 8.470839
+------------------------------------
+salt and pepper noise with 0.05
+++++++++++++++++++++++++++++++++++++
+SNR for box filter 3x3: 9.414893
+SNR for box filter 5x5: 11.098395
+------------------------------------
+median filter : 
+------------------------------------
+gaussian noise with 10
+++++++++++++++++++++++++++++++++++++
+SNR for mdeian filter 3x3: 17.655002
+SNR for mdeian filter 5x5: 16.015192
+------------------------------------
+gaussian noise with 30
+++++++++++++++++++++++++++++++++++++
+SNR for mdeian filter 3x3: 11.091201
+SNR for mdeian filter 5x5: 12.932721
+------------------------------------
+salt and pepper noise with 0.1
+++++++++++++++++++++++++++++++++++++
+SNR for mdeian filter 3x3: 14.836461
+SNR for mdeian filter 5x5: 15.786323
+------------------------------------
+salt and pepper noise with 0.05
+++++++++++++++++++++++++++++++++++++
+SNR for mdeian filter 3x3: 19.160758
+SNR for mdeian filter 5x5: 16.277215
+------------------------------------
+opening-then-closing filter : 
+------------------------------------
+gaussian noise with 10
+++++++++++++++++++++++++++++++++++++
+SNR for opening-then-closing filter : 13.240792
+------------------------------------
+gaussian noise with 30
+++++++++++++++++++++++++++++++++++++
+SNR for opening-then-closing filter : 11.175065
+------------------------------------
+salt and pepper noise with 0.1
+++++++++++++++++++++++++++++++++++++
+SNR for opening-then-closing filter : -2.150020
+------------------------------------
+salt and pepper noise with 0.05
+++++++++++++++++++++++++++++++++++++
+SNR for opening-then-closing filter : 5.435218
+------------------------------------
+closing-then-opening filter : 
+------------------------------------
+gaussian noise with 10
+++++++++++++++++++++++++++++++++++++
+SNR for closing-then-opening filter : 13.621662
+------------------------------------
+gaussian noise with 30
+++++++++++++++++++++++++++++++++++++
+SNR for closing-then-opening filter : 11.190557
+------------------------------------
+salt and pepper noise with 0.1
+++++++++++++++++++++++++++++++++++++
+SNR for closing-then-opening filter : -2.724415
+------------------------------------
+salt and pepper noise with 0.05
+++++++++++++++++++++++++++++++++++++
+SNR for closing-then-opening filter : 5.602341
