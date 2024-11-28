@@ -311,7 +311,7 @@ def nevatia_babu_5x5(img_arr, threshold):
                 grad = np.sum(kernel * region) 
                 grads.append(grad) 
             max_grad = np.max(grads) 
-            res_arr[i, j] = 0 if max_grad > threshold else 255 
+            res_arr[i, j] = 255 if max_grad < threshold else 0
     return res_arr
 
 img_arr_nevatia_babu = nevatia_babu_5x5(lena_arr, 12500)
