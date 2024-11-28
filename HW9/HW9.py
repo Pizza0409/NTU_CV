@@ -268,53 +268,82 @@ img_robinson = im.fromarray(img_arr_robinson.astype(np.uint8))
 # img_robinson.show()
 
 def nevatia_babu_5x5(img_arr, threshold):
-# 定義 Nevatia-Babu 算子 
-    kernels = [ 
-        np.array([[ 100, 100, 100, 100, 100], 
-                [ 100, 100, 100, 100, 100], 
-                [ 0, 0, 0, 0, 0], 
-                [-100, -100, -100, -100, -100], 
-                [-100, -100, -100, -100, -100]]), 
-        np.array([[ 100, 100, 100, 100, 100], 
-                [ 100, 100, 100, 78, -32], 
-                [ 100, 92, 0, -92, -100], 
-                [ 32, -78, -100, -100, -100], 
-                [-100, -100, -100, -100, -100]]),
-        np.array([[ 100, 100, 100, 32, -100], 
-                [ 100, 100, 92, -78, -100], 
-                [ 100, 100, 0, -100, -100], 
-                [ 100, 78, -92, -100, -100], 
-                [ 100, -32, -100, -100, -100]]), 
-        np.array([[-100, -100, 0, 100, 100], 
-                [-100, -100, 0, 100, 100], 
-                [-100, -100, 0, 100, 100], 
-                [-100, -100, 0, 100, 100], 
-                [-100, -100, 0, 100, 100]]),
-        np.array([[-100, 32, 100, 100, 100], 
-                [-100, -78, 92, 100, 100], 
-                [-100, -100, 0, 100, 100], 
-                [-100, -100, -92, 78, 100], 
-                [-100, -100, -100, -32, 100]]), 
-        np.array([[ 100, 100, 100, 100, 100], 
-                [ -32, 78, 100, 100, 100], 
-                [-100, -92, 0, 92, 100], 
-                [-100, -100, -100, -78, 32], 
-                [-100, -100, -100, -100, -100]]) 
-    ] 
-    img_arr = expand_with_replicate(img_arr, 2) 
-    res_arr = np.zeros([img_size0, img_size1]) 
-    for i in range(img_size0): 
-        for j in range(img_size1): 
-            grads = [] 
-            for kernel in kernels: 
-                region = img_arr[i:i+5, j:j+5] 
-                grad = np.sum(kernel * region) 
-                grads.append(grad) 
-            max_grad = np.max(grads) 
-            res_arr[i, j] = 255 if max_grad < threshold else 0
+    img_arr = expand_with_replicate(img_arr, 2)
+    m, n = img_arr.shape
+    res_arr = np.zeros([img_size0, img_size1])
+
+    for i in range(img_size0):
+        for j in range(img_size1):
+            '''
+            n0 = [100   100   100   100   100
+                  100   100   100   100   100
+                    0     0     0     0     0
+                 -100  -100  -100  -100  -100
+                 -100  -100  -100  -100  -100]
+            n1 = [100   100   100   100   100
+                  100   100   100    78   -32
+                  100    92     0   -92  -100
+                   32   -78  -100  -100  -100
+                 -100  -100  -100  -100  -100]
+            n2 = [100   100   100    32  -100
+                  100   100    92   -78  -100
+                  100   100     0  -100  -100
+                  100    78   -92  -100  -100
+                  100   -32  -100  -100  -100]
+            n3 = [-100 -100     0   100   100
+                  -100 -100     0   100   100
+                  -100 -100     0   100   100
+                  -100 -100     0   100   100
+                  -100 -100     0   100   100]
+            n4 = [-100   32   100   100   100
+                  -100  -78    92   100   100
+                  -100 -100     0   100   100
+                  -100 -100   -92    78   100
+                  -100 -100  -100   -32   100]
+            n5 = [100   100   100   100   100
+                  -32    78   100   100   100
+                 -100   -92     0    92   100
+                 -100  -100  -100   -78    32
+                 -100  -100  -100  -100  -100]
+            '''
+            n0 = 100 * int(img_arr[i, j]) + 100 * int(img_arr[i, j+1]) + 100 * int(img_arr[i, j+2]) + 100 * int(img_arr[i, j+3]) + 100 * int(img_arr[i, j+4]) \
+                + 100 * int(img_arr[i+1, j]) + 100 * int(img_arr[i+1, j+1]) + 100 * int(img_arr[i+1, j+2]) + 100 * int(img_arr[i+1, j+3]) + 100 * int(img_arr[i+1, j+4]) \
+                - 100 * int(img_arr[i+3, j]) - 100 * int(img_arr[i+3, j+1]) - 100 * int(img_arr[i+3, j+2]) - 100 * int(img_arr[i+3, j+3]) - 100 * int(img_arr[i+3, j+4]) \
+                - 100 * int(img_arr[i+4, j]) - 100 * int(img_arr[i+4, j+1]) - 100 * int(img_arr[i+4, j+2]) - 100 * int(img_arr[i+4, j+3]) - 100 * int(img_arr[i+4, j+4])
+            n1 = 100 * int(img_arr[i, j]) + 100 * int(img_arr[i, j+1]) + 100 * int(img_arr[i, j+2]) + 100 * int(img_arr[i, j+3]) + 100 * int(img_arr[i, j+4]) \
+                + 100 * int(img_arr[i+1, j]) + 100 * int(img_arr[i+1, j+1]) + 100 * int(img_arr[i+1, j+2]) + 78 * int(img_arr[i+1, j+3]) - 32 * int(img_arr[i+1, j+4]) \
+                + 100 * int(img_arr[i+2, j]) + 92 * int(img_arr[i+2, j+1]) - 92 * int(img_arr[i+2, j+3]) - 100 * int(img_arr[i+2, j+4]) \
+                + 32 * int(img_arr[i+3, j]) - 78 * int(img_arr[i+3, j+1]) - 100 * int(img_arr[i+3, j+2]) - 100 * int(img_arr[i+3, j+3]) - 100 * int(img_arr[i+3, j+4]) \
+                - 100 * int(img_arr[i+4, j]) - 100 * int(img_arr[i+4, j+1]) - 100 * int(img_arr[i+4, j+2]) - 100 * int(img_arr[i+4, j+3]) - 100 * int(img_arr[i+4, j+4])
+            n2 = 100 * int(img_arr[i, j]) + 100 * int(img_arr[i, j+1]) + 100 * int(img_arr[i, j+2]) + 32 * int(img_arr[i, j+3]) - 100 * int(img_arr[i, j+4]) \
+                + 100 * int(img_arr[i+1, j]) + 100 * int(img_arr[i+1, j+1]) + 92 * int(img_arr[i+1, j+2]) - 78 * int(img_arr[i+1, j+3]) - 100 * int(img_arr[i+1, j+4]) \
+                + 100 * int(img_arr[i+2, j]) + 100 * int(img_arr[i+2, j+1]) - 100 * int(img_arr[i+2, j+3]) - 100 * int(img_arr[i+2, j+4]) \
+                + 100 * int(img_arr[i+3, j]) + 78 * int(img_arr[i+3, j+1]) - 92 * int(img_arr[i+3, j+2]) - 100 * int(img_arr[i+3, j+3]) - 100 * int(img_arr[i+3, j+4]) \
+                + 100 * int(img_arr[i+4, j]) - 32 * int(img_arr[i+4, j+1]) - 100 * int(img_arr[i+4, j+2]) - 100 * int(img_arr[i+4, j+3]) - 100 * int(img_arr[i+4, j+4])
+            n3 = - 100 * int(img_arr[i, j]) - 100 * int(img_arr[i, j+1]) + 100 * int(img_arr[i, j+3]) + 100 * int(img_arr[i, j+4]) \
+                - 100 * int(img_arr[i+1, j]) - 100 * int(img_arr[i+1, j+1]) + 100 * int(img_arr[i+1, j+3]) + 100 * int(img_arr[i+1, j+4]) \
+                - 100 * int(img_arr[i+2, j]) - 100 * int(img_arr[i+2, j+1]) + 100 * int(img_arr[i+2, j+3]) + 100 * int(img_arr[i+2, j+4]) \
+                - 100 * int(img_arr[i+3, j]) - 100 * int(img_arr[i+3, j+1]) + 100 * int(img_arr[i+3, j+3]) + 100 * int(img_arr[i+3, j+4]) \
+                - 100 * int(img_arr[i+4, j]) - 100 * int(img_arr[i+4, j+1]) + 100 * int(img_arr[i+4, j+3]) + 100 * int(img_arr[i+4, j+4])
+            n4 = - 100 * int(img_arr[i, j]) + 32 * int(img_arr[i, j+1]) + 100 * int(img_arr[i, j+2]) + 100 * int(img_arr[i, j+3]) + 100 * int(img_arr[i, j+4]) \
+                - 100 * int(img_arr[i+1, j]) - 78 * int(img_arr[i+1, j+1]) + 92 * int(img_arr[i+1, j+2]) + 100 * int(img_arr[i+1, j+3]) + 100 * int(img_arr[i+1, j+4]) \
+                - 100 * int(img_arr[i+2, j]) - 100 * int(img_arr[i+2, j+1]) + 100 * int(img_arr[i+2, j+3]) + 100 * int(img_arr[i+2, j+4]) \
+                - 100 * int(img_arr[i+3, j]) - 100 * int(img_arr[i+3, j+1]) - 92 * int(img_arr[i+3, j+2]) + 78 * int(img_arr[i+3, j+3]) + 100 * int(img_arr[i+3, j+4]) \
+                - 100 * int(img_arr[i+4, j]) - 100 * int(img_arr[i+4, j+1]) - 100 * int(img_arr[i+4, j+2]) - 32 * int(img_arr[i+4, j+3]) + 100 * int(img_arr[i+4, j+4])
+            n5 = 100 * int(img_arr[i, j]) + 100 * int(img_arr[i, j+1]) + 100 * int(img_arr[i, j+2]) + 100 * int(img_arr[i, j+3]) + 100 * int(img_arr[i, j+4]) \
+                - 32 * int(img_arr[i+1, j]) + 78 * int(img_arr[i+1, j+1]) + 100 * int(img_arr[i+1, j+2]) + 100 * int(img_arr[i+1, j+3]) + 100 * int(img_arr[i+1, j+4]) \
+                - 100 * int(img_arr[i+2, j]) - 92 * int(img_arr[i+2, j+1]) + 92 * int(img_arr[i+2, j+3]) + 100 * int(img_arr[i+2, j+4]) \
+                - 100 * int(img_arr[i+3, j]) - 100 * int(img_arr[i+3, j+1]) - 100 * int(img_arr[i+3, j+2]) - 78 * int(img_arr[i+3, j+3]) + 32 * int(img_arr[i+3, j+4]) \
+                - 100 * int(img_arr[i+4, j]) - 100 * int(img_arr[i+4, j+1]) - 100 * int(img_arr[i+4, j+2]) - 100 * int(img_arr[i+4, j+3]) - 100 * int(img_arr[i+4, j+4])
+            
+            n_list = np.array([n0, n1, n2, n3, n4, n5])
+            grad = np.max(n_list)
+
+            res_arr[i, j] = 255 if grad < threshold else 0
+    
     return res_arr
 
 img_arr_nevatia_babu = nevatia_babu_5x5(lena_arr, 12500)
 img_nevatia_babu = im.fromarray(img_arr_nevatia_babu.astype(np.uint8))
-img_nevatia_babu.save("./img_nevatia_babu.bmp")
-img_nevatia_babu.show()
+# img_nevatia_babu.save("./img_nevatia_babu.bmp")
+# img_nevatia_babu.show()
