@@ -109,17 +109,17 @@ def frel_and_chen_grad(img_arr, threshold):
     for i in range(img_size0):
         for j in range(img_size1):
             '''
-            s1 = [-1 sqrt(-2)   -1
+            f1 = [-1 sqrt(-2)   -1
                     0       0   0
                     1 sqrt(2)   1]
-            s2 = [-1        0   1
+            f2 = [-1        0   1
                 sqrt(-)2    0 sqrt(2)
                 -1          0   1]
             '''
-            s1 = - int(img_arr[i, j]) - np.sqrt(2) * int(img_arr[i, j+1]) - int(img_arr[i, j+2]) + int(img_arr[i+2, j]) + np.sqrt(2) * int(img_arr[i+2, j+1]) + int(img_arr[i+2, j+2])
-            s2 = - int(img_arr[i, j]) - np.sqrt(2) * int(img_arr[i+1, j]) - int(img_arr[i+2, j]) + int(img_arr[i, j+2]) + np.sqrt(2) * int(img_arr[i+1, j+2]) + int(img_arr[i+2, j+2])
+            f1 = - int(img_arr[i, j]) - np.sqrt(2) * int(img_arr[i, j+1]) - int(img_arr[i, j+2]) + int(img_arr[i+2, j]) + np.sqrt(2) * int(img_arr[i+2, j+1]) + int(img_arr[i+2, j+2])
+            f2 = - int(img_arr[i, j]) - np.sqrt(2) * int(img_arr[i+1, j]) - int(img_arr[i+2, j]) + int(img_arr[i, j+2]) + np.sqrt(2) * int(img_arr[i+1, j+2]) + int(img_arr[i+2, j+2])
 
-            grad = np.sqrt(s1**2 + s2**2)
+            grad = np.sqrt(f1**2 + f2**2)
             res_arr[i, j] = 255 if grad < threshold else 0
     
     return res_arr
