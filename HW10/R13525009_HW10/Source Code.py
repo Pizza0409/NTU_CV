@@ -45,17 +45,16 @@ def laplace1(img_arr, threshold):
                      [1, -4, 1], 
                      [0, 1, 0]])
     
-    # 使用 expand 進行邊界填充
+    # Expand the image
     img_arr = expand_with_replicate(img_arr, 1)
     
-    # 使用 my_conv 進行卷積
+    # Using convolution
     res1 = my_conv(img_arr, mask, threshold)
 
-    # 展開結果以進行鄰域檢查
     res1 = expand_with_replicate(res1, 1)
-    res2 = np.ones((img_size0, img_size1))  # 初始化為 1
+    res2 = np.ones((img_size0, img_size1))
 
-    # # 鄰域檢查
+    # Neighbor checking
     for i in range(img_size0):
         for j in range(img_size1):
             if res1[i + 1, j + 1] == 1:
