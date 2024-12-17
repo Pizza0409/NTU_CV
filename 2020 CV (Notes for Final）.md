@@ -1,8 +1,8 @@
 ---
 title: 2020 CV (Notes for Final）
-
+source:
+  - https://hackmd.io/@tommyvsfu1/SyxBMw7oP
 ---
-
 # 2020 CV (Notes for Final）
 [先前期中共筆](https://hackmd.io/eG2UKqDdSQuXyTlB9uFPVQ)
 [去年共筆](https://hackmd.io/UhyNov3ASWm6DdsFvIUcwQ)
@@ -16,11 +16,6 @@ title: 2020 CV (Notes for Final）
 
 ## TOC
 [TOC]
-
-
-
-
-
 ## Ch7 Conditioning and Labeling
 ### 助教說可能會考的區塊
 **(真的只是可能而已)**
@@ -63,7 +58,6 @@ https://homepages.inf.ed.ac.uk/rbf/HIPR2/zeros.htm
 *    Median root: 
 一直重複做median filter會得到一個最後不會再改變的結果稱為 median root
 
-
 *    k-nearest neighbor average:
 將附近的所有像素值與中心像素值進行比較。 最接近的k個像素值用於確定最終值，在這種情況下為這些k個像素的平均值。
 
@@ -91,7 +85,7 @@ discontinuity in the ==first derivative== of the image intensity.
 * Line edge：兩個彼此靠近的step edge。（兩側明暗變化明顯的邊緣）
 Line edge comprises  ==two step edges that are close together==.
 *    Sobel Edge Detector（gradient detector）
-![](https://i.imgur.com/Axxt23i.png =300x)
+![](https://i.imgur.com/Axxt23i.png =300x) ^a65b24
 
 Laplacian透過計算二次微分通過零點(Zero Crossing)觀念來判定。
 Sobel使用的則是Gradient methods。
@@ -284,7 +278,7 @@ rate of change in the given direction
 透過對一階方向導數做方形(square area)積分，來量測積分方向導數的強度
 - corner detection algorithm
 ![](https://i.imgur.com/zSAew2y.png =500x300)
-
+ ^e3642d
 
 - corner points
 A corner can be defined as the intersection of two edges.
@@ -768,93 +762,149 @@ Each figure corresponds to different methods
     - Performance improved in terms of PESQ and STOI metrics
 
 ## Bonus
-Is text or joke more important?
-ans:笑話比本文重要！
 >貌似是每年都會有的bonus ：https://www.pttweb.cc/bbs/NTU-Exam/M.1578382932.A.CA6
+1. Is text or joke more important?
+	ans:笑話比本文重要！
+^4d6ded
 
-Please write the Chinese name of Professor Chiou-Shann Fuh.
-ans: 傅楸善
+2. Please write the Chinese name of Professor Chiou-Shann Fuh.
+	ans: 傅楸善
 
-猴子在開飛機
+	猴子在開飛機
 
-What's Professor Chiou-Shann Fuh's pet phrase? (a) 酷斃了Cool (b) 帥呆人Handsome (c\) 好極了Good (d)棒透了Awesome
+3. What's Professor Chiou-Shann Fuh's pet phrase? (a) 酷斃了Cool (b) 帥呆人Handsome (c\) 好極了Good (d)棒透了Awesome
+	(c\)
 
-(c\)
+4. Please translate "To err is human, to forgive divine." into Chinese.
+	人非聖賢，孰能無過
 
-Please translate "To err is human, to forgive divine." into Chinese.
-人非聖賢，孰能無過
-
-Please translate "塞翁失馬，焉知非福" into English.
-Sometimes misfortune is a blessing in disguise.
+5. Please translate "塞翁失馬，焉知非福" into English.
+	Sometimes misfortune is a blessing in disguise.
 
 ## 考古
 ### 108
 
-(1)conditioning
-(2)labeling
-(3)extremum sharpening
-(4)Sobel edge detector
-(5)facet model
-(6)directional derivative
-(7)corner detection algorithm
-(8)tangent line
-(9)fractal
-(10)Hough transform
-(11)border-tracking algorithm
-(12)iterative endpoint fit and split
-(13)tangential angle deflection
-(14)breakpoint optimization
-
-2.(6%) Please list at least 3 noise removal methods and equations using
-neighborhood operators.
-
-3.(6%) Please describe the method, steps, and results of Super Resolution and
+1. 
+	1. conditioning: 目的: 去除無用資訊 應用: 降躁
+	2. labeling: 目的: 針對像素進行標籤 應用: 邊緣偵測
+	3. extremum sharpening: 輸出值為鄰域的最小值或是最大值與中心像素之間的接近值，看 pixel 中間離鄰域的極大或極小值哪個比較近就當作輸出
+	4. Sobel edge detector: [[#^a65b24 | Sobel edge detectorp]]
+	5. facet model: 可以將圖像視為基礎連續體或分段連續灰階強度表面
+	6. directional derivative: rate of change derivative edge finder.
+	7. corner detection algorithm: [[2020 CV (Notes for Final）#^e3642d | Corner detection algorithm]]
+	8. tangent line: 切線，一條剛好觸碰到曲線上某一點的直線
+	9. fractal: 碎形，一種自然的現象或是數學運算使圖像在不同 scale 上 recursive 畫出相同的圖形。重複畫出相同的圖形
+	10. Hough transform: 在灰階圖中偵測直線和曲線的方法
+	11. border-tracking algorithm: Follow the border of a segmented image to extract boundary pixels.
+	12. iterative endpoint fit and split: 透過設定 distance threshold $d^*$, 和解 $d_m=max\{d_i\}$ 來將 arc sequence 分割成筆直的 subsequence
+	13. tangential angle deflection: 識別兩個線段相交並形成角度的位置來分割 arc sequence
+	14. breakpoint optimization: 移動 arc sequence 的斷點以產生最好的segment, 重複操作到沒有改善為止。
+2. (6%) Please list at least 3 noise removal methods and equations using neighborhood operators.
+	$Z_{midrange} = \frac{1}{2}\{x_1 + x_N\}$
+	$Z_{outlier\_removal} = \begin{cases} y , & \text{if } \|y < \hat{u}\| < \theta \\ \hat{u}, & \text{otherwise} \end{cases}$
+	$Z_{median} = x_{(\frac{N+1}{2})}$
+3. (6%) Please describe the method, steps, and results of Super Resolution and
 Point Spread Function Inverse Filtering for X-Ray Images
+	From ChatGPT:
+	**中文**：  
+	**方法**：超分辨率利用多幀低分辨率圖像重建高分辨率影像，點擴散函數反濾波（PSF）則恢復模糊影像的原始特徵。  
+	**步驟**：
+	1. 收集多幀影像並進行配準（alignment）。
+	2. 使用PSF模型對模糊影像進行逆濾波。
+	3. 應用重建算法（如迭代反投影）產生高分辨率結果。  
+	    **結果**：清晰的高分辨率X光影像。
+	
+	**English**:  
+	**Method**: Super-resolution reconstructs high-resolution images from multiple low-resolution ones, while PSF inverse filtering restores blurred images' original features.  
+	**Steps**:
+	1. Collect multiple frames and align them.
+	2. Apply PSF inverse filtering to deblur images.
+	3. Use reconstruction algorithms (e.g., iterative back-projection) to generate high-resolution results.  
+	    **Results**: Clear and high-resolution X-ray images.
+4. (6%) Consider the following 3X3 region:
+	r/c     -1      0       1
+	-1      3       5       9
+	0       4       7       7
+	1       0       3       7
+	The sloped facet is given by α^r + β^c + γ^ . What are the values of
+	estimated parameters α^, β^, γ^?
+5. (6%) Please describe the method, steps, and results of Hand Gesture
+	Recognition with 3D Camera.
+	From ChatGPT:
+	**中文**：  
+	**方法**：利用3D相機捕捉手部深度信息並進行分類。  
+	**步驟**：
+	1. 收集手勢數據並進行預處理（如背景去除）。
+	2. 提取特徵（如手部輪廓或深度）。
+	3. 使用分類器（如CNN）進行手勢分類。  
+	    **結果**：準確識別用戶手勢。
+	
+	**English**:  
+	**Method**: Use a 3D camera to capture depth information of the hand for classification.  
+	**Steps**:
+	1. Collect hand gesture data and preprocess it (e.g., background removal).
+	2. Extract features (e.g., contours or depth).
+	3. Classify gestures using a classifier (e.g., CNN).  
+	    **Results**: Accurate recognition of user gestures.
+6. (6%) Please list three issues of the texture analysis and give a detailed description for each issue.
+	From ChatGPT:
+	**中文**：
+	1. **多尺度問題**：紋理細節在不同尺度下有所不同，需考慮多尺度特徵提取。
+	2. **噪聲影響**：噪聲可能模糊紋理特徵，降低分類準確性。
+	3. **紋理相似性**：一些紋理類型可能高度相似，導致分類混淆。
+	
+	**English**:
+	1. **Multi-scale Problem**: Texture details vary across scales, requiring multi-scale feature extraction.
+	2. **Noise Impact**: Noise can obscure texture features, reducing classification accuracy.
+	3. **Texture Similarity**: Some textures may be highly similar, causing classification confusion.
+7. (6%) Please show the steps of the synthetic texture image generation, that is, how you can generate new texture images using one original texture image.
 
-4.(6%) Consider the following 3X3 region:
-r/c     -1      0       1
--1      3       5       9
-0       4       7       7
-1       0       3       7
-The sloped facet is given by α^r + β^c + γ^ . What are the values of
-estimated parameters α^, β^, γ^?
-Hint:
-
-
-5.(6%) Please describe the method, steps, and results of Hand Gesture
-Recognition with 3D Camera.
-
-6.(6%) Please list three issues of the texture analysis and give a detailed
-description for each issue.
-
-7.(6%) Please show the steps of the synthetic texture image generation, that is, how you can generate new texture images using one original texture image.
-
-8.(6%) Please describe the method, steps, and results of Driver Drowsiness
+8. (6%) Please describe the method, steps, and results of Driver Drowsiness
 Detection.
 
-9.(6%) Please list at least three image segmentation methods and explain in
-detail
+9. (6%) Please list at least three image segmentation methods and explain in detail
 
-10.(6%) Please calculate the average contrast (C(T)/#E(T)) of all edges.
+10. (6%) Please calculate the average contrast (C(T)/#E(T)) of all edges.
+	T=50
+	[45, 110]
+	[33,88]
+	[15, 65]
+	[45, 115]
+	[0, 225]
+	**Steps: (from ChatGPT)**
+	1. Contrast is defined as C(T)=∑∣Ihigh−Ilow∣C(T) = \sum |I_{\text{high}} - I_{\text{low}}|C(T)=∑∣Ihigh​−Ilow​∣, where ∣Ihigh−Ilow∣>T|I_{\text{high}} - I_{\text{low}}| > T∣Ihigh​−Ilow​∣>T.
+	2. The number of edges #E(T)\#E(T)#E(T) is the count of pairs where ∣Ihigh−Ilow∣>T|I_{\text{high}} - I_{\text{low}}| > T∣Ihigh​−Ilow​∣>T.
+	3. Given T=50T = 50T=50:
+	    - Pair 1: ∣45−110∣=65>50|45 - 110| = 65 > 50∣45−110∣=65>50 (Edge exists).
+	    - Pair 2: ∣33−88∣=55>50|33 - 88| = 55 > 50∣33−88∣=55>50 (Edge exists).
+	    - Pair 3: ∣15−65∣=50=50|15 - 65| = 50 = 50∣15−65∣=50=50 (No edge).
+	    - Pair 4: ∣45−115∣=70>50|45 - 115| = 70 > 50∣45−115∣=70>50 (Edge exists).
+	    - Pair 5: ∣0−225∣=225>50|0 - 225| = 225 > 50∣0−225∣=225>50 (Edge exists).
+	4. Calculate C(T)=65+55+70+225=415C(T) = 65 + 55 + 70 + 225 = 415C(T)=65+55+70+225=415.
+	5. Calculate #E(T)=4\#E(T) = 4#E(T)=4.
 
-T=50
-[45, 110]
-[33,88]
-[15, 65]
-[45, 115]
-[0, 225]
+		Result:**  
+		$\text{Average Contrast} = \frac{C(T)}{\#E(T)} = \frac{415}{4} = 103.75$
 
-11.(6%) Please describe the method, steps, and results of Filtered Back
-Projection for X-Ray Images
+11. (6%) Please describe the method, steps, and results of Filtered Back Projection for X-Ray Images
+	
+	
+12. (6%) Please fit the best straight line L: y=mx+b for the given data points.(圖片省略，但其三點分別為：(1, 3), (2, 2), (3, 1))
+	$$\begin{gathered}
+	y = mx + b \\
+	m = \frac{n\sum{xy} + \sum{x}\sum{y}}{n\sum{x^2}-\sum{x^2}} \\
+	b = \frac{\sum{y} - m\sum{x}}{n}\\
+	n = 3
+	\end{gathered}
+	$$
+1. (6%) Please describe the method, steps, and results of Medical Image Segmentation for Pancreas Cancer.
 
-12.(6%) Please fit the best straight line L: y=mx+b for the given data points.(圖片省略，但其三點分別為：(1, 3), (2, 2), (3, 1))
+[[#^4d6ded| Bonus]]
+14. (2%) Please write the Chinese name of Professor Chiou-Shann Fuh.
+15. (2%) What's Professor Chiou-Shann Fuh's pet phrase? (a) 酷斃了Cool (b) 帥呆人Handsome (c) 好極了Good (d)棒透了Awesome
+16. (2%) Is text or joke more important?
+17. (2%) Please translate "To err is human, to forgive divine." into Chinese.
+18. (2%) Please translate "塞翁失馬，焉知非福" into English. ^945c28
 
-13.(6%) Please describe the method, steps, and results of Medical Image
-Segmentation for Pancreas Cancer.
-
-Bonus
-14.(2%) Please write the Chinese name of Professor Chiou-Shann Fuh.
-15.(2%) What's Professor Chiou-Shann Fuh's pet phrase? (a) 酷斃了Cool (b) 帥呆人Handsome (c) 好極了Good (d)棒透了Awesome
-16.(2%) Is text or joke more important?
-17.(2%) Please translate "To err is human, to forgive divine." into Chinese.
-18.(2%) Please translate "塞翁失馬，焉知非福" into English.
+## **必考** :
+[[CV_Final_助教研究]]
